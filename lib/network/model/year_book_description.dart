@@ -1,7 +1,7 @@
 
 
 import 'package:json_annotation/json_annotation.dart';
-part 'year_book_description.g.dart';
+//part 'year_book_description.g.dart';
 @JsonSerializable()
 class YearbookDescription{
  final String Desc;
@@ -11,12 +11,13 @@ class YearbookDescription{
 
  factory YearbookDescription.fromJson(Map<String, dynamic> json) =>
      YearbookDescription(
-      Desc: json["Desc"],
-      Price: json["Price"],
+      Desc: json["Desc"] ?? "",
+      Price: json["Price"]?? "",
      );
  Map<String, dynamic> toJson() => {
   "Desc": Desc,
   "Price": Price,
  };
+
 
 }
