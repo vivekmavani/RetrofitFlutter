@@ -38,9 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: _buildBody(context),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
@@ -105,7 +102,7 @@ Widget _buildListView(BuildContext context, List<Datas> posts) {
       ),
     );
   },
-    itemCount: posts.length,
+    itemCount: 10,
   );
 }
 
@@ -114,7 +111,7 @@ Widget _secondBlock(List<Datas> posts, int index) =>
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          child: Text(posts[index].yearbook_description.Price),
+          child: Text(posts[index].yearbook_description.Price,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black87),),
         ),
         Container(
           child: Row(
@@ -131,7 +128,6 @@ Widget _secondBlock(List<Datas> posts, int index) =>
 
 Widget _button(IconData pending, String title, Color grey) =>
     TextButton.icon(
-
       onPressed: () {},
       icon: Icon(
         pending,
@@ -156,6 +152,7 @@ Widget _firstblock(List<Datas> posts, int index) =>
             posts[index].img_http_thumb,
             height: 100.0,
             width: 100.0,
+            fit: BoxFit.cover,
           ),
           SizedBox(width: 10.0,),
           _addtext(posts, index),
@@ -168,16 +165,30 @@ Widget _addtext(List<Datas> posts, int index) =>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(posts[index].yearbook_name,style: TextStyle(),),
+          Text(posts[index].yearbook_name,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black87),),
+          SizedBox(
+            height: 5.0,
+          ),
           Text(posts[index].yearbook_description.Desc),
           SizedBox(
             height: 5.0,
           ),
-          Text('Pages: Min 20 - Max 80'),
+          Row(
+            children: [
+              Text('Pages: ',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black87),),
+              Text('Min 20 - Max 80',style: TextStyle(color: Colors.black87),),
+            ],
+          ),
+
           SizedBox(
             height: 5.0,
           ),
-          Text('Est. Delivary 5-7 workijng days'),
+          Row(
+            children: [
+              Text('Est. Delivary ',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black87),),
+              Text('5-7 workijng days',style: TextStyle(color: Colors.black87),),
+            ],
+          ),
         ],
       ),
     );

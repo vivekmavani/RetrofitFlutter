@@ -18,7 +18,8 @@ abstract class ApiService {
           'Authorization': 'Bearer c3a79702a8ce0ee920f7c56d4f3488adaeb1eadd',
         }
     );
-    //dio.interceptors.add{LogInterceptor(responseBody: true, requestBody: true)};
+  //  dio.interceptors.add{LogInterceptor(responseBody: true, requestBody: true)};
+    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
       return _ApiService(dio, baseUrl: baseUrl);
     }
 

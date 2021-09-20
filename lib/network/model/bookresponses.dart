@@ -48,6 +48,26 @@ class BookResponses {
     return data;
   }
 }
+
+class Errors {
+  Errors({
+    required this.error,
+    required this.errorDescription,
+  });
+
+  final String error;
+  final String errorDescription;
+
+  factory Errors.fromJson(Map<String, dynamic> json) => Errors(
+    error: json["error"],
+    errorDescription: json["error_description"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "error": error,
+    "error_description": errorDescription,
+  };
+}
 class Response {
   bool? status;
   String ? message;
