@@ -7,7 +7,7 @@ part 'api_service.g.dart';
 @RestApi(baseUrl: 'http://www.demoaws.picsy.in/api')
 abstract class ApiService {
 
-  factory ApiService(Dio dio, {String? baseUrl})
+  factory ApiService(Dio dio, String? baseUrl)
   {
     dio.options = BaseOptions(
         receiveTimeout: 30000,
@@ -15,10 +15,9 @@ abstract class ApiService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer c3a79702a8ce0ee920f7c56d4f3488adaeb1eadd',
+          'Authorization': 'Bearer 85b3e9922b97d73fc1e7b1145390eeed4776c1be',
         }
     );
-  //  dio.interceptors.add{LogInterceptor(responseBody: true, requestBody: true)};
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
       return _ApiService(dio, baseUrl: baseUrl);
     }

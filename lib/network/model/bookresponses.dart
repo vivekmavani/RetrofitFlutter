@@ -1,33 +1,7 @@
 
 import 'package:taskretofitpicsy/network/model/datas.dart';
 
-/*
-@JsonSerializable()
-class Responses {
-  final bool status;
-  final String message;
-  final List<Datas> data;
 
-  Responses({
-    required this.status,
-    required this.message,
-    required this.data,
-  });
-
-  factory Responses.fromJson(Map<String, dynamic> json) => Responses(
-    status: json["status"] ?? "" ,
-    message: json["message"] ?? "",
-    data: List<Datas>.from(json["data"].map((x) => Datas.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "status": status,
-    "message": message,
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
-  };
-
-}
-*/
 
 class BookResponses {
   Response? response;
@@ -73,7 +47,7 @@ class Response {
   String ? message;
   late List<Datas> data;
 
-  Response({this.status, this.message, required this.data});
+  Response({required this.status,required this.message, required this.data});
 
   Response.fromJson(Map<String, dynamic> json) {
     status = json['status'];

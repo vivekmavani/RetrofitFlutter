@@ -9,7 +9,6 @@ class Datas{
 
   Datas({required this.yearbook_name, required this.yearbook_description, required this.img_http_thumb});
 
-
   factory Datas.fromJson(Map<String, dynamic> json){
     if (json.isNotEmpty){
       return  Datas(
