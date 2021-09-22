@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskretofitpicsy/network/apiservice/api_service.dart';
 import 'package:taskretofitpicsy/network/model/bookresponses.dart';
@@ -20,6 +21,118 @@ class _MyHomePageState extends State<MyHomePage> {
     BlocProvider.of<YearbookCubit>(context).fetchyearbook();
 
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(color: Colors.blue),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 80,
+                      width: 80,
+                      child: const CircleAvatar(
+                          backgroundImage: AssetImage("assets/appicon.png")),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Image.network(
+                "https://s3.ap-south-1.amazonaws.com/picsyinlive/images/user_photos/8350/large/USER_PHOTOS_8350_20210326_152637_8098.png",
+                height: 30,
+                width: 30,
+              ),
+              title: Text("My Gifts"),
+              trailing: Icon(Icons.new_releases, color: Color(0xFFec5872)),
+            ),
+            ListTile(
+              leading: Image.network(
+                  "https://s3.ap-south-1.amazonaws.com/picsyinlive/images/user_photos/8350/large/USER_PHOTOS_8350_20210326_152624_79307.png",
+                  height: 30,
+                  width: 30),
+              title: Text("More Designs"),
+            ),
+            ListTile(
+              leading: Image.network(
+                  "https://s3.ap-south-1.amazonaws.com/picsyinlive/images/user_photos/8350/large/USER_PHOTOS_8350_20210326_152656_47415.png",
+                  height: 30,
+                  width: 30),
+              title: const Text("Previous Orders"),
+            ),
+            ListTile(
+              leading: Image.network(
+                  "https://s3.ap-south-1.amazonaws.com/picsyinlive/images/user_photos/8350/large/USER_PHOTOS_8350_20210326_152724_1190.png",
+                  height: 30,
+                  width: 30),
+              title: const Text("New Albums"),
+              trailing: const Icon(Icons.new_releases, color: Colors.redAccent),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (BuildContext context) => YearbookCubit(),
+                      child: const MyHomePage(),
+                    ),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Image.network(
+                  "https://s3.ap-south-1.amazonaws.com/picsyinlive/images/user_photos/8350/large/USER_PHOTOS_8350_20210326_152712_80995.png",
+                  height: 30,
+                  width: 30),
+              title: const Text("Earn Rewards"),
+              trailing: const Icon(Icons.monetization_on_outlined,
+                  color: Colors.green),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              child: Column(
+                children: const [
+                  Divider(
+                    height: 4,
+                    color: Colors.black,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.exit_to_app),
+                    title: Text("Log Out"),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        systemOverlayStyle:
+        const SystemUiOverlayStyle(statusBarColor: Color(0xFFec5872)),
+        backgroundColor: Colors.white,
+        actions: [
+          const Icon(Icons.notifications_none_outlined),
+          Padding(
+            padding: EdgeInsets.all(12),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text('Chat'),
+            ),
+          ),
+          const Icon(Icons.more_vert),
+        ],
+        iconTheme: const IconThemeData(color: Colors.black87),
+        title: Image.asset(
+          'assets/appicon.png',
+          fit: BoxFit.fitHeight,
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Container(
           child: BlocBuilder<YearbookCubit, YearbookState>(

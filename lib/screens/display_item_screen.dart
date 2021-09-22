@@ -9,29 +9,26 @@ class DisplayItemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title : Text(post.yearbook_name,
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    ),
+      ),
       body:  Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Padding(padding: EdgeInsets.only(top:50)),
           Hero(
             tag: 'yearbookitem$index',
             child: Image.network(
               post.img_http_thumb,
-              height: 200.0,
-              width: 200.0,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitWidth,
             ),
           ),
-          Text(
-            post.yearbook_name,
-            style:
-            TextStyle(fontWeight: FontWeight.bold, color: Colors.black87,),
-              textAlign: TextAlign.center,
+          const Padding(padding: EdgeInsets.only(top:50)),
+          Text(post.yearbook_description.Desc,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            textAlign: TextAlign.center,
           ),
-          const SizedBox(
-            height: 5.0,
-          ),
-          Text(post.yearbook_description.Desc,textAlign: TextAlign.center,),
         ],
       ),
     );
