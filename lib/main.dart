@@ -26,10 +26,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      //home: const Picsyhomepage(),
-      home: BlocProvider(
-          create: (BuildContext context) => YearbookCubit(),
-          child: const MyHomePage(),),
+      home: const Picsyhomepage(),
+
     );
   }
 }

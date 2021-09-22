@@ -15,7 +15,7 @@ abstract class ApiService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer 85b3e9922b97d73fc1e7b1145390eeed4776c1be',
+          'Authorization': 'Bearer 407a1f598314c214761757fc6cf6606af4dc50cf',
         }
     );
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));

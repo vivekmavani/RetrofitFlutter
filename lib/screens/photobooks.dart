@@ -86,25 +86,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Widget _buildListView(BuildContext context, List<Datas> posts) {
   return ListView.builder(
-
     itemBuilder: (context, index) {
-      return Card(
-        margin: const EdgeInsets.all(12.0),
-        clipBehavior: Clip.hardEdge,
-        elevation: 10.0,
-        shadowColor: Colors.black12,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: _firstblock(posts, index),
-            ),
-            const Divider(),
-            Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: _secondBlock(posts, index),
-            ),
-          ],
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return  DisplayItemScreen(post :posts[index],index: index);
+          }));
+        },
+        child: Card(
+          margin: const EdgeInsets.all(12.0),
+          clipBehavior: Clip.hardEdge,
+          elevation: 10.0,
+          shadowColor: Colors.black12,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: _firstblock(posts, index),
+              ),
+              const Divider(),
+              Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: _secondBlock(posts, index),
+              ),
+            ],
+          ),
         ),
       );
     },
@@ -161,11 +167,14 @@ Widget _button(IconData pending, String title, Color grey) => TextButton.icon(
 Widget _firstblock(List<Datas> posts, int index) => Container(
   child: Row(
     children: [
-      Image.network(
-        posts[index].img_http_thumb,
-        height: 100.0,
-        width: 100.0,
-        fit: BoxFit.cover,
+      Hero(
+        tag: 'yearbookitem$index',
+        child: Image.network(
+          posts[index].img_http_thumb,
+          height: 100.0,
+          width: 100.0,
+          fit: BoxFit.cover,
+        ),
       ),
       const SizedBox(
         width: 10.0,
@@ -174,19 +183,20 @@ Widget _firstblock(List<Datas> posts, int index) => Container(
     ],
   ),
 );
-
 Widget _addtext(List<Datas> posts, int index) => Expanded(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
-        posts[index].yearbook_name,
-        style:
-        TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
+      Texts(
+        title :posts[index].yearbook_name,
+        fontWeight: FontWeight.bold,
+        color: Colors.black87,
       ),
+
       const SizedBox(
         height: 5.0,
       ),
+
       Text(posts[index].yearbook_description.Desc),
       const SizedBox(
         height: 5.0,
@@ -223,3 +233,4 @@ Widget _addtext(List<Datas> posts, int index) => Expanded(
     ],
   ),
 );
+

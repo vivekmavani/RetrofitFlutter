@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskretofitpicsy/custom_widget/custom_texts.dart';
 import 'package:taskretofitpicsy/screens/photobooks.dart';
+
+import '../cubi.dart';
 
 class Picsyhomepage extends StatelessWidget {
   const Picsyhomepage({Key? key}) : super(key: key);
@@ -63,10 +66,15 @@ class Picsyhomepage extends StatelessWidget {
                   width: 30),
               title: const Text("New Albums"),
               trailing: const Icon(Icons.new_releases, color: Colors.redAccent),
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (BuildContext context) => YearbookCubit(),
+                      child: const MyHomePage(),
+                    ),
+                  ),
                 );
               },
             ),
@@ -76,8 +84,8 @@ class Picsyhomepage extends StatelessWidget {
                   height: 30,
                   width: 30),
               title: const Text("Earn Rewards"),
-              trailing:
-              const Icon(Icons.monetization_on_outlined, color: Colors.green),
+              trailing: const Icon(Icons.monetization_on_outlined,
+                  color: Colors.green),
             ),
             Container(
               margin: const EdgeInsets.only(top: 40),
@@ -99,7 +107,7 @@ class Picsyhomepage extends StatelessWidget {
       ),
       appBar: AppBar(
         systemOverlayStyle:
-        const SystemUiOverlayStyle(statusBarColor: Color(0xFFec5872)),
+            const SystemUiOverlayStyle(statusBarColor: Color(0xFFec5872)),
         backgroundColor: Colors.white,
         actions: [
           const Icon(Icons.notifications_none_outlined),

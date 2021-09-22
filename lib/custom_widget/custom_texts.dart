@@ -5,7 +5,7 @@ class Texts extends StatelessWidget {
   Texts({
    required this.title,
     required this.color,
-    required this.fontsize,
+     this.fontsize : 15.0,
     this.fontWeight :  FontWeight.normal,
   });
 

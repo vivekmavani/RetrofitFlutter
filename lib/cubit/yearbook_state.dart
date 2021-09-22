@@ -9,3 +9,5 @@ class YearbookLoading extends YearbookState{
   final BookResponses bookResponses;
   YearbookLoading({required this.bookResponses});
 }
+
+  
