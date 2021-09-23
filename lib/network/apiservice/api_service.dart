@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
-import 'package:taskretofitpicsy/network/model/bookresponses.dart';
+import 'package:taskretofitpicsy/network/model/allmodel.dart';
+
 
 part 'api_service.g.dart';
 
@@ -13,9 +14,10 @@ abstract class ApiService {
         receiveTimeout: 30000,
         connectTimeout: 30000,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json',
-          'Authorization': 'Bearer 407a1f598314c214761757fc6cf6606af4dc50cf',
+          'Authorization': 'Bearer 3c5ef58f7af1fc744ff8ef4cc1f8dfe1b9125c0e',
+          'X-API-Version' :'v2',
         }
     );
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
