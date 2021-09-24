@@ -41,43 +41,63 @@ class DisplayItemScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Column(
+          ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
             children: [
-              Visibility(
-                visible: post.yearbook_banner.isEmpty ? false:true,
-                child: Image.network(post.yearbook_banner, fit: BoxFit.cover),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Html(
-                style: {
-                  'html': Style(textAlign: TextAlign.center),
-                },
-                data: post.app_preview_description,
-              ),
-              Container(
-                child: GridView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: false,
-                  padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        children: [
-                          Image.network(post.pages[index].image_data[index].thumb),
-                          Text(post.pages[index].page_name),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+              Column(
+                children: [
+                  Visibility(
+                    visible: post.yearbook_banner.isEmpty ? false:true,
+                    child: Image.network(post.yearbook_banner, fit: BoxFit.cover),
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  Html(
+                    style: {
+                      'html': Style(textAlign: TextAlign.center),
+                    },
+                    data: post.app_preview_description,
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  _getimage(post.pages[0].image_data[0].thumb,post.pages[0].page_name,context,0,post.pages[0].page_index),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  GridView.count(crossAxisCount: 2,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    primary: false,
+                    children: List.generate(post.pages.length, (index) =>
+                        _getimage(post.pages[index].image_data[0].thumb,post.pages[index].page_name,context,1,index,post.pages.length),
+                       // Image.network(post.pages[index].image_data[0].thumb,fit: BoxFit.fitWidth,),
+                    ),
+                  ),
+                  _getimage(post.pages[post.pages.length-1].image_data[0].thumb,post.pages[post.pages.length-1].page_name,context,0,post.pages[0].page_index),
+                  const SizedBox(
+                    height: 60.0,
+                  ),
+                ],
               ),
             ],
           ),
-          Container(
+          Positioned(
+            bottom: 0.0,
+            child: Container(
+              height: 60.0,
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.symmetric(horizontal: 100.0,vertical: 8.0),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('Create Now'),
+              ),
+            ),
+          ),
+        /*  Container(
             alignment: Alignment.bottomCenter,
             color: Colors.transparent,
              child: Container(
@@ -90,9 +110,29 @@ class DisplayItemScreen extends StatelessWidget {
                  child: const Text('Create Now'),
            ),
              ),
-          ),
+          ),*/
         ],
       ),
     );
   }
 }
+Widget _getimage(String thumb,String title,BuildContext context, int i, int page_index, [int? length]) =>
+    i== 1 ?  Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    0 == page_index || length!-1 == page_index ? Container(color: Colors.grey.shade700,height: MediaQuery.of(context).size.height / 6,width: MediaQuery.of(context).size.width / 2) :
+    Image.network(thumb, height: MediaQuery.of(context).size.height / 6,width: MediaQuery.of(context).size.width / 2,fit: BoxFit.cover,),
+   Visibility(
+     visible:  page_index.isEven ? true : false,
+            child:  page_index == 0  ? Texts(title: 'Page ${page_index + 1}', color: Colors.grey.shade700,)
+                : page_index == length!-2 ? Texts(title: 'Page ${page_index}', color: Colors.grey.shade700,)
+                : Texts(title: 'Page ${page_index}-${page_index + 1}', color: Colors.grey.shade700,),
+   ),
+  ],
+) :  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Image.network(thumb, height: MediaQuery.of(context).size.height / 6,width: MediaQuery.of(context).size.width / 2,fit: BoxFit.cover,),
+         Texts(title: title, color: Colors.grey.shade700,),
+      ],
+    );

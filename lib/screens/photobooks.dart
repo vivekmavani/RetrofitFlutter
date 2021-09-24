@@ -135,10 +135,16 @@ class _MyHomePageState extends State<MyHomePage> {
           child: BlocBuilder<YearbookCubit, YearbookState>(
   builder: (context, state) {
     if(!(state is YearbookLoading))
-       return Center(child: CircularProgressIndicator());
-    final posts  = (state as YearbookLoading).bookResponses;
+      {
+        print('CircularProgressIndicator');
+        return const Center(child: CircularProgressIndicator());
+      }else
+        {
+          print('DOne');
+          final posts  = (state as YearbookLoading).bookResponses;
+          return _buildListView(context, posts.response!.data);
+        }
 
-    return _buildListView(context, posts.response!.data);
   },
 ),
           color: Colors.grey.shade200,
@@ -234,7 +240,7 @@ Widget _secondBlock(List<Datas> posts, int index) => Row(
     Container(
       padding: const EdgeInsets.only(left: 6.0),
       child: Text(
-        posts[index].yearbook_description.Price,
+        posts[index].yearbook_description.Price.toString(),
         style:
         const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87,fontSize:18.0),
       ),
@@ -278,7 +284,7 @@ Widget _firstblock(List<Datas> posts, int index) => Container(
   child: Row(
     children: [
       Image.network(
-        posts[index].img_http_thumb,
+        posts[index].img_http_thumb.toString(),
         height: 100.0,
         width: 100.0,
         fit: BoxFit.cover,
@@ -297,7 +303,7 @@ Widget _addtext(List<Datas> posts, int index) => Expanded(
       Hero(
         tag: 'yearbookitem$index',
         child: Texts(
-          title :posts[index].yearbook_name,
+          title :posts[index].yearbook_name.toString(),
           fontWeight: FontWeight.bold,
           color: Colors.black87,
         ),

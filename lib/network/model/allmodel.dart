@@ -5,7 +5,7 @@ class BookResponses {
 
   BookResponses.fromJson(Map<String, dynamic> json) {
     response =
-        json['response'] != null ? Response.fromJson(json['response']) : null;
+    json['response'] != null ? Response.fromJson(json['response']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -26,12 +26,14 @@ class Errors {
   final String error;
   final String errorDescription;
 
-  factory Errors.fromJson(Map<String, dynamic> json) => Errors(
+  factory Errors.fromJson(Map<String, dynamic> json) =>
+      Errors(
         error: json["error"],
         errorDescription: json["error_description"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "error": error,
         "error_description": errorDescription,
       };
@@ -75,15 +77,14 @@ class Datas {
   final String app_preview_description;
   final List<Pagesofyearbook> pages;
 
-  Datas(
-      {required this.yearbook_name,
-      required this.yearbook_description,
-      required this.img_http_thumb,
-      required this.yearbook_banner,
-      required this.app_preview_description,
-      required this.pages});
+  Datas({required this.yearbook_name,
+    required this.yearbook_description,
+    required this.img_http_thumb,
+    required this.yearbook_banner,
+    required this.app_preview_description,
+    required this.pages});
 
-  /* Datas.fromJson(Map<String, dynamic> json) {
+/* Datas.fromJson(Map<String, dynamic> json) {
         json["yearbook_name"] ?? "";
         json["yearbook_description"] != null
             ? YearbookDescription.fromJson(json["yearbook_description"])
@@ -100,6 +101,7 @@ class Datas {
         }
 
   }*/
+
   factory Datas.fromJson(Map<String, dynamic> json) {
     return Datas(
       img_http_thumb: json["img_http_thumb"] ?? "",
@@ -126,7 +128,7 @@ class Datas {
   }
 }
 
-class Pagesofyearbook {
+/*class Pagesofyearbook {
   int? master_yearbook_page_id;
   int? page_index;
   int? page_editable;
@@ -177,6 +179,69 @@ class Pagesofyearbook {
     }
     return data;
   }
+}*/
+class Pagesofyearbook {
+   int? master_yearbook_page_id;
+   late int page_index;
+   int? page_editable;
+   int? master_template_id;
+   int? width;
+   int? height;
+ late  String page_name;
+  late List<ImageData> image_data;
+
+  Pagesofyearbook({required this.master_yearbook_page_id,
+    required this.page_index,
+    required this.page_editable,
+    required this.master_template_id,
+    required this.width,
+    required this.height,
+    required this.page_name,
+    required this.image_data});
+
+  Pagesofyearbook.fromJson(Map<String, dynamic> json) {
+    master_yearbook_page_id = json['master_yearbook_page_id'];
+    page_index = json['page_index'];
+    page_editable = json['page_editable'];
+    master_template_id = json['master_template_id'];
+    if (json['image_data'] != null) {
+      image_data = <ImageData>[];
+      json['image_data'].forEach((v) {
+        image_data.add(new ImageData.fromJson(v));
+      });
+    }
+    width = json['width'];
+    height = json['height'];
+    page_name = json['page_name'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['master_yearbook_page_id'] = this.master_yearbook_page_id;
+    data['page_index'] = this.page_index;
+    data['page_editable'] = this.page_editable;
+    data['master_template_id'] = this.master_template_id;
+    if (this.image_data != null) {
+      data['image_data'] = this.image_data.map((v) => v.toJson()).toList();
+    }
+    data['width'] = this.width;
+    data['height'] = this.height;
+    data['page_name'] = this.page_name;
+    return data;
+  }
+/*  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['master_yearbook_page_id'] = this.master_yearbook_page_id;
+    data['page_index'] = this.page_index;
+    data['page_editable'] = this.page_editable;
+    data['master_template_id'] = this.master_template_id;
+    data['width'] = this.width;
+    data['height'] = this.height;
+    data['page_name'] = this.page_name;
+    if (this.image_data != null) {
+      data['image_data'] = this.image_data.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }*/
 }
 
 class ImageData {
@@ -215,7 +280,8 @@ class YearbookDescription {
         Price: json["Price"] ?? "",
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "Desc": Desc,
         "Price": Price,
       };
